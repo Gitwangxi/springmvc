@@ -59,6 +59,8 @@ public class ChatController {
 	public String createchat(Chat chat,HttpServletRequest request,HttpServletResponse response){
 		try {
 			chatService.saveChat(chat);
+			//推送消息
+			chatService.pushMessage();
 			return "SUCCESS";
 		} catch (Exception e) {
 			return "FAIL";

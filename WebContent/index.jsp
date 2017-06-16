@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	this is index jsp
+	姜赤那-工作室-欢迎您
 </body>
 </html>

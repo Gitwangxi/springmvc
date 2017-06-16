@@ -78,7 +78,7 @@ public class LoginController {
 		Subject s=SecurityUtils.getSubject();
 		if(s.isRemembered()||s.isAuthenticated()) {
         	//return "redirect:main";
-			mv.setViewName("redirect:chat/index");
+			mv.setViewName("redirect:/chat/index");
         }
 		mv.setViewName("/view/login");
 		return mv;
@@ -88,7 +88,7 @@ public class LoginController {
 	    public ModelAndView checkLogin(@RequestParam(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM) String userName,ModelAndView mv){
 		 logger.info("*****登录参数*****"+userName);   
 		 mv.addObject(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM,userName);
-	     mv.setViewName("/chat/index");
+	     mv.setViewName("redirect:/chat/index");
 	     return mv;
 	    }
 	/**

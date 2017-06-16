@@ -15,6 +15,9 @@ import com.kingnod.entity.Chat;
 
 public interface ChatDao extends PagingAndSortingRepository<Chat,Long>, JpaSpecificationExecutor<Chat> {
 	
-	@Query("select a from Chat a where a.readFlag=:readFlag order by a.sendDate asc")
-	List<Chat> findNotReadChat(@Param("readFlag")String readFlag);
+	@Query("select a from Chat a where a.sendId<>:sendId and a.readFlag=:readFlag order by a.sendDate asc")
+	List<Chat> findNotReadChat(@Param("readFlag")String readFlag,@Param("sendId")Long sendId);
+	
+	@Query("select a from Chat a where a.sendId=:sendId and a.readFlag=:readFlag order by a.sendDate asc")
+	List<Chat> findCurrendSendAndNotRead(@Param("readFlag")String readFlag,@Param("sendId")Long sendId);
 }

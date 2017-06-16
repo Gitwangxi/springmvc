@@ -221,7 +221,12 @@ var PL = {
 
 		// Construct base URL for GET
 		var url = PL.pushletURL + '?p_event=' + anEvent;
-
+		//add by zhenghongwei 2016-07-15 start
+		//var userId = getMenuValue("userId");  
+		if (anEvent == 'join' || anEvent == 'join-listen') {    
+			url = url + '&userId=' + PL.userId;   
+		}
+		//add by zhenghongwei 2016-07-15 end
 		// Optionally attach query string
 		if (aQuery) {
 			url = url + '&' + aQuery;
@@ -382,8 +387,8 @@ var PL = {
 				return null;
 			};
 		}
-
-		PL.pushletURL = PL._getWebRoot() + 'pushlet.srv';
+		//zhenghongwei修改请求路径
+		PL.pushletURL = PL._getWebRoot() +'pushlet.srv';
 		PL._setStatus('initialized');
 		PL.state = PL.STATE_READY;
 	},
@@ -392,12 +397,12 @@ var PL = {
 	_onEvent: function (event) {
 		// Create a PushletEvent object from the arguments passed in
 		// push.arguments is event data coming from the Server
-
+		console.info("--event---"+event);
 		PL.debug('_onEvent()', event.toString());
 
 		// Do action based on event type
 		var eventType = event.getEvent();
-
+		console.info("--eventType---"+event.getEvent());
 		if (eventType == 'data') {
 			PL._setStatus('data');
 			PL._doCallback(event, window.onData);

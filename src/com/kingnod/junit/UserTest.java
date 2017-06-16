@@ -1,3 +1,4 @@
+package com.kingnod.junit;
 /*package com.kingnod.test;
 
 import java.util.List;

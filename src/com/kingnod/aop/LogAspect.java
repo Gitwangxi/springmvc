@@ -48,5 +48,19 @@ public class LogAspect {
         System.out.println("后置通知:方法正常结束了");
     }     
          
-   
+	@AfterReturning(returning="parame",pointcut="execution(* com.kingnod.service.aop.TestService.testAop(..))")
+    public void testAopException(JoinPoint call,Object parame){
+		try {
+			Object[] Object =	call.getArgs();
+	    	Long id =(Long) Object[0];
+	    	sc(id.intValue());
+	    	String loginName = (String) Object[1];
+	    	System.out.println("-----id:"+id+"---loginName:"+loginName);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+    }
+	public void sc(int a){
+		int	b =	a/0;
+	}
 }   

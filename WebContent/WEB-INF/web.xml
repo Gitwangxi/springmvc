@@ -48,11 +48,20 @@
   <servlet>
     <servlet-name>pushlet</servlet-name>
     <servlet-class>nl.justobjects.pushlet.servlet.Pushlet</servlet-class>
+    <load-on-startup>3</load-on-startup>
+  </servlet>
+  <servlet>
+    <servlet-name>myPushlet</servlet-name>
+    <servlet-class>com.kingnod.pushlet.PushletService</servlet-class>
     <!-- <load-on-startup>1</load-on-startup> -->
   </servlet>
   <servlet-mapping>
     <servlet-name>pushlet</servlet-name>
     <url-pattern>/chat/pushlet.srv</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>myPushlet</servlet-name>
+    <url-pattern>/myPushlet</url-pattern>
   </servlet-mapping>
   <filter>
     <filter-name>SpringCharacterEncodingFilter</filter-name>

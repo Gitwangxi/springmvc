@@ -29,7 +29,7 @@
 			 <div class="form-group">
 				<div class="col-xs-offset-3 col-xs-5">
 					<div class="input-group">
-				        <span class="input-group-addon" id="basic-addon1">游侠${userName}:</span>
+				        <span class="input-group-addon" id="basic-addon1">${user.name }:</span>
 						<input type="text" class="form-control" name="content" id="content" placeholder="我想说...">
 				        <span class="input-group-btn">
 				        	<button class="btn btn-success" type="button" id="sendBtn">发送!</button>
@@ -47,19 +47,33 @@
 		</form>	
 		<script type="text/javascript"> 
 			$("#content").focus();
+			PL.join();
+			PL.listen();
+			PL.subscribe('allTOall');
 			//pushlet组件
             //PL._init();
-			Pl.userId="${user.id}";
-            PL.joinListen('/zheng/hongwei');
+			PL.userId="${user.id}";
+			if (PL.sessionId == null) {  
+				var a = "${user.id}";
+				PL.userId="${user.id}";
+				//PL._init();
+			}
+            PL.joinListen('allTOall');
             function onData(event) {
+            	console.info("----参数---"+event);
+            	if(event=="" || event==null || event.get("mes")== null || event.get("mes") == ""){
+            		console.info("参数为空啊");
+            		return false;
+            	}
             	//event 获取的内容是 int  long  或者 String 类型的，所以如果要从控制层传回一个对象需要在控制层将对象转换为json放入event中；
             	var data =jQuery.parseJSON(decodeURIComponent(event.get("mes")));
+            	console.info("---返回的数据---"+JSON.stringify(data));
             	var time = event.get("time");
             	var chatType = $("#chatType").val();//消息类型
             	var receiveId = $("#receiveId").val();//接收者Id
             	var sendName = "${user.name}";//发送者Id
                 $.each(data,function(i,chat){
-                	if(chat.sendId !=sendId){//不发送给自己
+                	if(chat.sendId != "${user.id}"){//不发送给自己
                 		if(chatType !="allTOall"){//发送给指定房间的房间 或者个人
                     		if(chat.receive == receiveId){
                     			$("#bank").append("<div class='content-line'>"+"<strong>"+chat.sendName+"：</strong>"+chat.content+"</div>");
@@ -93,6 +107,7 @@
 			                if(msg !="SUCCESS"){
 			                	console.info("发送消息失败");
 					        }else{
+					        	//p_publish("allTOall","userId","3");//手动触发消息推送
 					        	$("#content").val("");
 					        	$("#content").focus();
 					        }
@@ -116,6 +131,11 @@
      	            $("#sendBtn").focus();
       	    }
       	});
+        
+        //定时刷新pushlet
+       /*  var t2 = window.setInterval(function(){
+        	//p_join_listen("allTOall");
+        },2000); */
         </script>  
 	</body>
 </html>	

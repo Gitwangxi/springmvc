@@ -37,6 +37,10 @@ public class Chat extends CommenEntity {
 	 */
 	private Long sendId;
 	/**
+	 * 发送者名称
+	 */
+	private String sendName;
+	/**
 	 * 接收对象ID （如房间ID，或者个人用户ID）
 	 */
 	private Long receiveId;
@@ -84,6 +88,15 @@ public class Chat extends CommenEntity {
 
 	public void setSendId(Long sendId) {
 		this.sendId = sendId;
+	}
+
+	@Column(name="send_name",length=100)
+	public String getSendName() {
+		return sendName;
+	}
+
+	public void setSendName(String sendName) {
+		this.sendName = sendName;
 	}
 
 	public Long getReceiveId() {

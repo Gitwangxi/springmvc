@@ -49,7 +49,7 @@
                                 <img src="${ctx}/static/assets/images/users/avatar.jpg" alt="John Doe"/>
                             </div>
                             <div class="profile-data">
-                                <div class="profile-data-name">姜赤那</div>
+                                <div class="profile-data-name">${user.name}</div>
                                 <div class="profile-data-title">社区管理员</div>
                             </div>
                             <div class="profile-controls">
@@ -58,10 +58,13 @@
                             </div>
                         </div>                                                                        
                     </li>
-                    <li class="xn-title">Navigation</li>
-                    <li class="active">
-                        <a href="index.html"><span class="fa fa-desktop"></span> <span class="xn-text">Dashboard</span></a>                        
-                    </li>                    
+                    <li class="xn-openable active">
+                    	<a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">工作室</span></a>
+                    	 <ul>
+                            <li><a href="${ctx}/chat/index"><span class="fa fa-user"></span>聊天</a></li>
+                            <li><a href="pages-profile.html"><span class="fa fa-desktop"></span>视频压缩</a></li>
+                         </ul>
+                    </li>
                     <li class="xn-openable">
                         <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Pages</span></a>
                         <ul>
